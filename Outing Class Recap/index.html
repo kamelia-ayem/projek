@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Outing Class Estetik</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --sage: #88a47c; --soft-green: #d1e2c4; --cream: #f4f9f1; --dark: #374a35; }
+        body { background-color: var(--cream); color: var(--dark); font-family: 'Plus Jakarta Sans', sans-serif; margin: 0; line-height: 1.6; }
+        
+        #flower-faller { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 10; }
+        .petal { position: absolute; top: -10%; animation: falling linear infinite; opacity: 0.6; }
+        @keyframes falling { to { transform: translateY(110vh) rotate(360deg); } }
+
+        header { padding: 80px 20px; text-align: center; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--dark); }
+
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 40px; max-width: 1200px; margin: auto; }
+        .card { background: white; padding: 20px; border-radius: 30px; cursor: pointer; transition: 0.4s; border: 1px solid var(--soft-green); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .card:hover { transform: translateY(-10px); border-color: var(--sage); }
+        .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 20px; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center; padding: 20px; }
+        .modal-content { background: white; padding: 40px; border-radius: 30px; max-width: 600px; text-align: left; position: relative; }
+        .modal-content img { width: 100%; height: 300px; object-fit: cover; border-radius: 20px; margin-bottom: 20px; }
+        .close-btn { position: absolute; top: 20px; right: 20px; font-size: 2rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="flower-faller"></div>
+
+    <header>
+        <h1>Jurnal Outing Class</h1>
+        <p>Kumpulan jejak petualangan, ilmu, dan memori yang tak terlupakan.</p>
+    </header>
+
+    <div class="gallery">
+        <div class="card" onclick="openModal('foto anggrek.jpeg', 'Bunga Anggrek yang Anggun', 'Menjelajahi keindahan flora di rumah kaca PIAT UGM. Anggrek-anggrek ini bukan sekadar tanaman hias, melainkan hasil riset serius melalui teknik kultur jaringan yang menakjubkan.')">
+            <img src="foto anggrek.jpeg" alt="Anggrek"><h3>Bunga Anggrek</h3>
+        </div>
+        <div class="card" onclick="openModal('foto bareng di piat.jpeg', 'Harmoni Kebersamaan', 'Di antara hijaunya lahan pertanian PIAT UGM, kami berbagi tawa dan semangat belajar. Foto ini menjadi saksi bisu betapa eratnya ikatan kelompok kami saat menimba ilmu.')">
+            <img src="foto bareng di piat.jpeg" alt="Bersama"><h3>Momen Kebersamaan</h3>
+        </div>
+        <div class="card" onclick="openModal('foto pengolahan sampah piat.jpeg', 'Sistem Inovasi Limbah', 'Melihat lebih dekat bagaimana sampah diolah menggunakan teknologi konveyor modern. Ini adalah pelajaran nyata tentang tanggung jawab kita terhadap lingkungan.')">
+            <img src="foto pengolahan sampah piat.jpeg" alt="Sampah"><h3>Pengolahan Sampah</h3>
+        </div>
+        <div class="card" onclick="openModal('foto piat ugm.jpeg', 'Gerbang Inovasi PIAT UGM', 'Gedung PIAT UGM bukan sekadar struktur bangunan, melainkan mercusuar riset agroteknologi. Tempat di mana ide-ide besar tentang keberlanjutan pangan dirancang.')">
+            <img src="foto piat ugm.jpeg" alt="PIAT"><h3>Gedung PIAT UGM</h3>
+        </div>
+        <div class="card" onclick="openModal('foto produk eco enzym.jpeg', 'Sihir Eco Enzym', 'Proses fermentasi sederhana yang menghasilkan keajaiban. Mengubah limbah kulit buah menjadi cairan multiguna yang ramah lingkungan.')">
+            <img src="foto produk eco enzym.jpeg" alt="Eco"><h3>Produk Eco Enzym</h3>
+        </div>
+        <div class="card" onclick="openModal('foto produk pesnab.jpeg', 'Kearifan Pestisida Nabati', 'Belajar cara melindungi tanaman dengan kekuatan alam itu sendiri. Pestisida nabati mengajarkan kita bahwa tidak harus merusak lingkungan dengan kimia keras.')">
+            <img src="foto produk pesnab.jpeg" alt="Pesnab"><h3>Pestisida Nabati</h3>
+        </div>
+        <div class="card" onclick="openModal('kebun organik.jpeg', 'Simfoni Kebun Organik', 'Menelusuri setiap jengkal lahan yang dikelola tanpa bahan sintetis. Sayuran yang tumbuh di sini adalah bukti bahwa jika kita bekerja selaras dengan alam, alam akan memberikan yang terbaik.')">
+            <img src="kebun organik.jpeg" alt="Kebun"><h3>Kebun Organik</h3>
+        </div>
+        <div class="card" onclick="openModal('foto titik 0 jogja.jpeg', 'Jantung Sejarah Yogyakarta', 'Titik Nol Kilometer adalah tempat di mana waktu seakan berhenti. Di sekelilingnya, arsitektur kolonial berdiri megah, menjadi saksi bisu perkembangan kota.')">
+            <img src="foto titik 0 jogja.jpeg" alt="Titik 0"><h3>Titik Nol KM</h3>
+        </div>
+        <div class="card" onclick="openModal('keraton yogya tour guide.jpeg', 'Hikayat dari Sang Penjaga', 'Mendengarkan kisah luhur langsung dari Abdi Dalem Keraton. Setiap kata yang beliau ucapkan membawa kita menyelami kedalaman filosofi hidup masyarakat Jawa.')">
+            <img src="keraton yogya tour guide.jpeg" alt="Keraton"><h3>Tour Guide Keraton</h3>
+        </div>
+        <div class="card" onclick="openModal('logo keraton yogya.jpeg', 'Simbol Keagungan Praja Cihna', 'Lambang ini bukan sekadar gambar, melainkan representasi filosofi yang mendalam tentang keteguhan, perlindungan, dan keselarasan.')">
+            <img src="logo keraton yogya.jpeg" alt="Logo"><h3>Lambang Keraton</h3>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal" onclick="this.style.display='none'">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-btn" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+            <img id="modalImg" src="">
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc"></p>
+        </div>
+    </div>
+
+    <script>
+        function openModal(src, title, desc) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('myModal').style.display = 'flex';
+        }
+        
+        const container = document.getElementById('flower-faller');
+        setInterval(() => {
+            const p = document.createElement('div'); p.innerHTML = '🌸'; p.className = 'petal';
+            p.style.left = Math.random() * 100 + 'vw'; p.style.animationDuration = Math.random() * 5 + 5 + 's';
+            container.appendChild(p); setTimeout(() => p.remove(), 10000);
+        }, 600);
+    </script>
+</body>
+</html>
